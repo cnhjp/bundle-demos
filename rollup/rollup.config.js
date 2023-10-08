@@ -1,9 +1,10 @@
 const typescript = require("@rollup/plugin-typescript");
+const myPlugin = require("./plugins/my-plugin.js");
 
 module.exports = {
   input: "src/index.ts", // 入口文件。如果是多入口，可以是一个数组或对象；单入口可以是字符串
   external: ["lodash"], // 外部依赖，不会打包到 bundle 中
-  plugins: [typescript()], // 插件，构建module graph时使用
+  plugins: [myPlugin(), typescript()], // 插件，构建module graph时使用
   output: {
     dir: "dist", // 生成文件所在目录，适用于多入口文件打包
     // file: "dist/bundle.js", // 生成的 bundle 的文件名及目录，适用于单入口文件打包
