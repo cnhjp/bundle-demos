@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "esnext",
+    "strict": true,
+    "esModuleInterop": true,
+    "noEmit": true, // 设置 noEmit 选项
+    "allowImportingTsExtensions": true
+  }
+}
