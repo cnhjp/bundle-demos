@@ -2,12 +2,20 @@ import { defineConfig } from 'vite'
 import { resolve } from 'path'
 import vue from '@vitejs/plugin-vue'
 import { splitVendorChunkPlugin } from 'vite'
+import testPlugin from './plugins/vite-plugin-test.ts'
 
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(), splitVendorChunkPlugin()],
+  plugins: [vue(), splitVendorChunkPlugin(), {
+    // @ts-ignore
+    ...testPlugin({ plugin: 'test' }),
+    enforce: 'pre'
+  }],
   base: '/foo',
+  define: {
+    'Math.PI': '3.14'
+  },
   build: {
     minify: false,
     rollupOptions: {
@@ -15,7 +23,9 @@ export default defineConfig({
         main: resolve(__dirname, 'index.html'),
         nested: 'nested/index.html'
       },
-      // external: ['vue'],
+      external: [
+        // 'vue',
+      ],
     },
     // lib: {
     //   entry: resolve(__dirname, 'lib/main.ts'),
